@@ -1,0 +1,44 @@
+# Cole estes exemplos no GraphiQL: http://localhost:8080/graphiql
+# (execute uma operação por vez; se aparecer mais de uma, o GraphiQL pede para escolher)
+
+# ---------- QUERIES ----------
+
+query TodosHumanos {
+  humans { id name height friends { id name } }
+}
+
+query TodasNaves {
+  starships { id name length }
+}
+
+query PersonagemPorId {
+  character(id: 4) {
+    id
+    name
+    friends { name }
+    ... on Human { height }
+    ... on Droid { primaryFunction }
+  }
+}
+
+# ---------- MUTATIONS ----------
+
+mutation NovoHuman {
+  createHuman(id: 10, name: "Obi-Wan Kenobi", height: 1.82) { id name height }
+}
+
+mutation NovoDroid {
+  createDroid(id: 11, name: "BB-8", primaryFunction: "Astromech") { id name primaryFunction }
+}
+
+mutation NovaNave {
+  createStarship(id: 10, name: "Death Star", length: 160000) { id name length }
+}
+
+mutation NovoAmigo {
+  addFriend(characterId: 10, friendId: 1) {
+    id
+    name
+    friends { id name }
+  }
+}
